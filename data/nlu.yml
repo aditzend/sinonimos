@@ -1,0 +1,24 @@
+version: "2.0"
+
+nlu:
+- intent: compraDivisa
+  examples: |
+    - necesito comprar [dolares](moneda)
+    - cuantos [azul](moneda) puedo comprar
+    - que pasos tengo que seguir para poder realizar una compra de [euros](moneda)
+    - cuantos [verde](moneda) puedo comprar por mes?
+    - cuantas [lechugas](moneda) puedo comprar por mes
+
+- intent: ventaDivisa
+  examples: |
+    - necesito vender [lechuguita](moneda)
+    - cuantos [euros](moneda) puedo vender
+    - que pasos tengo que seguir para poder realizar una comprar de [euros](moneda)
+    - cuantos [azul](moneda) puedo vender por mes?
+    - cuantos [verde](moneda) puedo vender por mes
+
+- synonym: dolares
+  examples: |
+    - dolar
+    - lechuga
+    - verde
