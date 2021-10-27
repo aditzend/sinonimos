@@ -1,0 +1,82 @@
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+#language: en
+
+#pipeline:
+# # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
+# # If you'd like to customize it, uncomment and adjust the pipeline.
+# # See https://rasa.com/docs/rasa/tuning-your-model for more information.
+#   - name: WhitespaceTokenizer
+#   - name: RegexFeaturizer
+#   - name: LexicalSyntacticFeaturizer
+#   - name: CountVectorsFeaturizer
+#   - name: CountVectorsFeaturizer
+#     analyzer: char_wb
+#     min_ngram: 1
+#     max_ngram: 4
+#   - name: DIETClassifier
+#     epochs: 100
+#     constrain_similarities: true
+#   - name: EntitySynonymMapper
+#   - name: ResponseSelector
+#     epochs: 100
+#     constrain_similarities: true
+#   - name: FallbackClassifier
+#     threshold: 0.3
+#     ambiguity_threshold: 0.1
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+#policies:
+# # No configuration for policies was provided. The following default policies were used to train your model.
+# # If you'd like to customize them, uncomment and adjust the policies.
+# # See https://rasa.com/docs/rasa/policies for more information.
+#   - name: MemoizationPolicy
+#   - name: RulePolicy
+#   - name: UnexpecTEDIntentPolicy
+#     max_history: 5
+#     epochs: 100
+#   - name: TEDPolicy
+#     max_history: 5
+#     epochs: 100
+#     constrain_similarities: true
+language: es
+#idioma
+
+# NLU
+#Partimos de un lenguaje natural y lo convertimos en un lenguaje entendible para la máquina
+pipeline:
+# Parte el texto en palabras pq es inglés
+# solo puede usarse uno. PARA el DIET se esperan estos requerimientos. Hay otros tokenizadores pero dependerá del clasificador.
+  - name: WhitespaceTokenizer
+  #usa regex 
+  - name: RegexFeaturizer
+  #modifican el texto para extraer números
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 4
+  #DI(intents)E(Entities)TClassifier
+  - name: DIETClassifier
+    epochs: 100
+    #Estas dos cosas significan lo mismo así que tratalos así
+  - name: EntitySynonymMapper
+  # selecciona como responder
+  - name: ResponseSelector
+    epochs: 100
+
+# Dialog policies: Qué hacer después?
+policies:
+  # Seguí el patrón de las historias
+  - name: MemoizationPolicy
+  # Si alguna de nuestras reglas es seguida hacé lo que dicen las reglas.
+  - name: RulePolicy
+  # Transformer neuronal network 
+  - name: TEDPolicy
+  # hyperparametros para TEDPolicy
+  # Rango de atención del asistente. Tarda más en entrenar.
+    max_history: 5
+  # Cantidad de rondas de entrenamiento
+    epochs: 100
