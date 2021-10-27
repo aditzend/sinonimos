@@ -17,6 +17,11 @@ nlu:
     - cuantos [azul](moneda) puedo vender por mes?
     - cuantos [verde](moneda) puedo vender por mes
 
+- intent: cambioEntreDivisas
+  examples: |
+    - necesito cambiar  [yenes](moneda_origen) por [libras](moneda_destino)
+    - cuantas [libras](moneda_origen) me dan por mis [yenes](moneda_destino)
+
 - synonym: dolares
   examples: |
     - dolar
